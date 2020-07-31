@@ -13,7 +13,7 @@ class Triangle
     @side1 + @side2 > @side3 && @side2 + @side3 > @side1 && @side1 + @side3 > @side2
   end
   
-  def non_triangle?
+  def nonvalid_triangle?
     @all_sides.each do |length|
       if length <= 0
         return true
@@ -22,7 +22,7 @@ class Triangle
   end
 
   def kind
-    if non_triangle? == true || valid? == false
+    if nonvalid_triangle? == true || valid? == false
       raise TriangleError
     elsif @side1 != @side2 && @side1 != @side3 && @side2 != @side3
       :scalene
