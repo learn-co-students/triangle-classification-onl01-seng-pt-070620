@@ -1,40 +1,37 @@
-
-require 'pry'
-
 class Triangle
-  
-  attr_accessor :s1, :s2, :s3, :equilateral, :scalene, :isosceles, :type
-  def initialize(s1, s2, s3)
-    @s1 = s1
-    @s2 = s2 
-    @s3 = s3 
-  end
-  
-  def kind
-    sum_of_1_and_2 = self.s1 + self.s2 
-    sum_of_2_and_3 = self.s2 + self.s3
-    sum_of_1_and_3 = self.s1 + self.s3
-    
-    if (self.s1 == 0 || self.s2 == 0 || self.s3 == 0) || (self.s1 < 0 || self.s2 < 0 || self.s3 < 0) || (sum_of_1_and_2 < self.s3 || sum_of_1_and_3 < self.s2 || sum_of_2_and_3 < self.s1) || (sum_of_1_and_2 == self.s3 || sum_of_1_and_3 == self.s2 || sum_of_2_and_3 == self.s1)
-      raise TriangleError
-    end
-    
-   
-    if self.s1 == self.s2 && self.s2 == self.s3
-      # binding.pry
-      return :equilateral
-  
-    elsif (self.s1 == self.s2 && self.s2 != self.s3) || (self.s2 == self.s3 && self.s1 != self.s3) || (self.s1 == self.s3 && self.s1 != self.s2)
-      return :isosceles
- 
-    elsif (self.s1 != self.s2) && (self.s2 != self.s3) && (self.s3 != self.s1)
-      return :scalene
-  
-    end
-  end
-  
-  class TriangleError < StandardError
-    
-  end
-  
+  # write code here
+attr_accessor :a, :b, :c
+
+		def initialize(a,b,c)
+			@a=a
+			@b=b
+			@c=c
+			#binding.pry
+		end
+
+		def kind
+				if @a == 0 || @b == 0 || @c == 0 
+				#binding.pry
+					begin
+						raise TriangleError
+					end
+				elsif (@a < 0 || @b < 0 || @c < 0) || (@a + @b <= @c || @b + @c <= @a || @a + @c <= @b)
+	     			begin
+	        			raise TriangleError
+					end
+				elsif @a == @b && @a == @c && @b == @c
+					:equilateral
+				elsif @a == @b || @b == @c || @a == @c 
+					:isosceles
+				else
+					:scalene
+
+			end
+		end
+class TriangleError < StandardError 
+  end 
+
+
+
+
 end
